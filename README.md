@@ -1,5 +1,6 @@
 # League of Legends: Towers vs Kills Win Rate Statistical Analysis
 This is a project for DSC 80 at UCSD.
+
 Author:  Hsin Yu Ho (hyho@ucsd.edu)
 
 <p align="center">
