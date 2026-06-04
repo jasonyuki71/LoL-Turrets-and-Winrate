@@ -265,7 +265,7 @@ The observed accuracies were:
 
 - Blue Side Accuracy: 98.50%
 - Red Side Accuracy: 98.59%
-- Observed difference in accuracy = |0.98503 - 0.98592| = 0.00089
+- Observed difference in accuracy = [|0.98503 - 0.98592| = 0.00089]
 
 <iframe
     src='assets/fairness_test.html'
