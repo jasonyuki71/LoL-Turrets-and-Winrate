@@ -1,13 +1,12 @@
-# LoL-Turrets-and-Winrate
+# League of Legends: Towers vs Kills Win Rate Statistical Analysis
 This is a project for DSC 80 at UCSD.
-
-# League of Legends: Are Towers the Key to Victory?
-
-by Hsin Yu Ho 
+Author:  Hsin Yu Ho (hyho@ucsd.edu)
 
 <p align="center">
     <img src="image/lol.webp" width="900">
 </p>
+
+---
 ## Introduction
 
 League of Legends (LoL) is a multiplayer online battle arena (MOBA) game developed by Riot Games. There are more than 150 million players playing this game, which is one of the world’s most popular esports.
