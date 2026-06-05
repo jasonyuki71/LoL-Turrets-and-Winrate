@@ -24,7 +24,7 @@ The dataset contains team-level match statistics, including variables such as to
 
 ## Data Cleaning and Exploratory Data Analysis
 
-The original dataset contains detailed information about professional League of Legends matches. To focus on team-level analysis, I selected observations corresponding to teams rather than individual players. I also restricted the dataset to complete matches and retained columns relevant to my research question.
+The original dataset contains detailed information about professional League of Legends matches, which has 150348 rows × 165 columns. To focus on team-level analysis, I selected observations corresponding to teams rather than individual players. I also restricted the dataset to complete matches and retained columns relevant to my research question.
 
 Several cleaning steps:
 
@@ -49,11 +49,11 @@ After filtering the dataset to team-level observations, I selected a subset of c
 * `xpdiffat25`: Experience difference between the team and its opponent at 25 minutes.
 * `csdiffat25`: Creep score (CS) difference between the team and its opponent at 25 minutes.
 
-Below is cleaned lol_team dataframe:
+Below is the `head` of my cleaned `lol_team` dataframe (25058 rows × 12 columns):
 <iframe
     src="assets/cleaned_df.html"
     width="100%"
-    height="300">
+    height="200">
 </iframe>
 
  These variables were chosen because they capture key aspects of team performance, including combat success (`teamkills`, `teamdeaths`), objective control (`towers`, `dragons`, `barons`), and economic advantages (`golddiffat25`, `xpdiffat25`, `csdiffat25`). These factors are important indicators of a team's win rate.
@@ -65,7 +65,7 @@ One important variable is the number of towers destroyed by a team. The boxplot 
 <iframe
     src="assets/towers_histogram.html"
     width="100%"
-    height="600"
+    height="500"
     frameborder="0">
 </iframe>
 
@@ -73,7 +73,14 @@ The other important variable is the number of kills secured by a team. The boxpl
 <iframe
     src="assets/kills_histogram.html"
     width="100%"
-    height="600"
+    height="500"
+    frameborder="0">
+</iframe>
+
+<iframe
+    src="assets/describe_towers_teamkills.html"
+    width="100%"
+    height="200"
     frameborder="0">
 </iframe>
 
@@ -88,7 +95,7 @@ We can see that the loss teams destroyed less towers than winning teams; winning
 <iframe
     src="assets/towers_boxplot.html"
     width="100%"
-    height="600"
+    height="500"
     frameborder="0">
 </iframe>
 
@@ -96,7 +103,7 @@ We can see that the loss teams had less number of kills than winning teams; winn
 <iframe
     src="assets/kills_boxplot.html"
     width="100%"
-    height="600"
+    height="500"
     frameborder="0">
 </iframe>
 
@@ -107,7 +114,7 @@ Grouping by match result reveals substantial differences in objective control.
 <iframe
     src="assets/pivot.html"
     width="100%"
-    height="300">
+    height="80">
 </iframe>
 
 The winning team destroyed a larger number of towers on average, which initially proves that tower control is an important factor in determining the outcome of the game.
@@ -134,7 +141,7 @@ To determine whether the missingness of `assistsat25` depends on another observe
 <iframe
     src="assets/missingness_assistsat25_DataComplete.html"
     width="100%"
-    height="600"
+    height="500"
     frameborder="0">
 </iframe>
 
@@ -154,7 +161,7 @@ Because a team's side (Blue/Red) should not directly influence whether `assistsa
 <iframe
     src='assets/missingness_assistsat25_side.html'
     width="100%"
-    height="600"
+    height="500"
     frameborder="0">
 </iframe>
 
@@ -179,7 +186,7 @@ I conducted a permutation test by repeatedly shuffling match outcomes and recalc
 <iframe
     src='assets/hypothesis_test.html'
     width="100%"
-    height="600"
+    height="500"
     frameborder="0">
 </iframe>
 
@@ -270,7 +277,7 @@ The observed accuracies were:
 <iframe
     src='assets/fairness_test.html'
     width="100%"
-    height="600"
+    height="500"
     frameborder="0">
 </iframe>
 
