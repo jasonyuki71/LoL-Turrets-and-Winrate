@@ -24,6 +24,8 @@ The dataset contains team-level match statistics, including variables such as to
 
 ## Data Cleaning and Exploratory Data Analysis
 
+### Data Cleaning
+
 The original dataset contains detailed information about professional League of Legends matches, which has 150348 rows × 165 columns. To focus on team-level analysis, I selected observations corresponding to teams rather than individual players. I also restricted the dataset to complete matches and retained columns relevant to my research question.
 
 Several cleaning steps:
@@ -107,6 +109,7 @@ We can see that the loss teams had less number of kills than winning teams; winn
     frameborder="0">
 </iframe>
 
+
 ### Interesting Aggregates
 
 Grouping by match result reveals substantial differences in objective control.
@@ -114,7 +117,7 @@ Grouping by match result reveals substantial differences in objective control.
 <iframe
     src="assets/pivot.html"
     width="100%"
-    height="80">
+    height="150">
 </iframe>
 
 The winning team destroyed a larger number of towers on average, which initially proves that tower control is an important factor in determining the outcome of the game.
@@ -165,9 +168,7 @@ Because a team's side (Blue/Red) should not directly influence whether `assistsa
     frameborder="0">
 </iframe>
 
-The permutation test produced a p-value of **1.0**.
-
-Since the p-value is much **greater than** 0.05, I **failed to reject** the null hypothesis. There is no evidence that the missingness of `assistsat25` depends on a team's side (Blue/Red). In fact, the observed TVD of 0 indicates that the distribution of `side` is identical for missing and non-missing values of `assistsat25` in our dataset. Therefore, the missingness of `assistsat25` appears to be **independent** of `side`.
+Since permutation test produced a p-value of **1.0**, which is much **greater than** 0.05, I **failed to reject** the null hypothesis. Therefore, there is no evidence that the missingness of `assistsat25` depends on a team's side (Blue/Red). In fact, the observed TVD of 0 indicates that the distribution of `side` is identical for missing and non-missing values of `assistsat25` in our dataset. Therefore, the missingness of `assistsat25` appears to be **independent** of `side`.
 
 Overall, the results indicate that the missingness of `assistsat25` is associated with `datacompleteness` but not with `side`. Therefore, the missingness of `assistsat25` is Missing At Random (MAR).
 
@@ -226,11 +227,6 @@ The model uses two features:
 
 Because both variables are numerical, no categorical encoding was required. The features were standardized before fitting the model.
 
-| Model                        | Train Accuracy | Test Accuracy |
-| ---------------------------- | -------------- | ------------- |
-| Baseline Logistic Regression | 96.55%         | 96.57%        |
-| Final Model                  | 98.98%         | 98.55%        |
-
 The baseline Logistic Regression model achieved a training accuracy of 96.55% and a test accuracy of 96.57%. The difference between train and test accuracy is very small, suggesting that the model generalizes well and is not overfitting the training data. However, the model uses only a small number of features and may not fully capture other important aspects of team performance, such as objective control and relative advantages over the opponent.
 
 ---
@@ -247,9 +243,21 @@ The baseline model only used raw `towers`, raw `teamkills`, and `side`. For the 
 
 I use a **Random Forest Classifier** as the final model because it captures nonlinear relationships and interactions between features. This is useful because the effect of towers, kills, and objectives on winning may not be perfectly linear.
 
-The final model achieved a training accuracy of 98.98% and a testing accuracy of 98.55%, improving upon the baseline model's testing accuracy of 96.57%. This improvement suggests that the engineered features and Random Forest classifier were able to capture additional information about match outcomes that was not utilized by the baseline Logistic Regression model.
+### Hyperparameter Tuning
+I used GridSearchCV with 5-fold cross-validation to tune the following hyperparameters:
+* `n_estimators`: the number of decision trees in the forest. More trees can make predictions more stable. [100, 200]
+* `max_depth`: controls how deep each tree can grow. This helps control overfitting. [3, 5, 8, None]
+* `min_samples_leaf`: controls the minimum number of samples required at a leaf node. Larger values can make the model less overfit. [1, 5, 10]
 
-Although the final model achieved a higher training accuracy than the baseline model, the testing accuracy also increased substantially. The difference between training and testing accuracy is only about 0.43 percentage points, indicating little evidence of severe overfitting and suggesting that the model generalizes well to unseen matches.
+
+| Model                        | Train Accuracy | Test Accuracy |
+| ---------------------------- | -------------- | ------------- |
+| Baseline Logistic Regression | 96.55%         | 96.57%        |
+| Final Model                  | 98.98%         | 98.55%        |
+
+The final model's training accuracy and testing accuracy are improving test accuracy by approximately 1.98 percentage points over the baseline model. This improvement suggests that the engineered features and Random Forest classifier were able to capture additional information about match outcomes that was not utilized by the baseline Logistic Regression model.
+
+The Random Forest model has training accuracy is slightly higher than the testing accuracy, but the gap between them is only 0.43 percentage points. This small difference suggests that the model is not overfitting or underfitting, which generalizes well to unseen matches. In addition, the improvement in testing accuracy over the baseline model indicates that the engineered features and model tuning contributed meaningful predictive value.
 
 The confusion matrix shows that the final model correctly classifies most wins and losses, which is consistent with its high test accuracy of 98.55%.
 <iframe
@@ -258,13 +266,6 @@ The confusion matrix shows that the final model correctly classifies most wins a
     height="500"
     frameborder="0">
 </iframe>
-
-
-### Hyperparameter Tuning
-I used GridSearchCV with 5-fold cross-validation to tune the following hyperparameters:
-* `n_estimators`: the number of decision trees in the forest. More trees can make predictions more stable. [100, 200]
-* `max_depth`: controls how deep each tree can grow. This helps control overfitting. [3, 5, 8, None]
-* `min_samples_leaf`: controls the minimum number of samples required at a leaf node. Larger values can make the model less overfit. [1, 5, 10]
 
 ---
 
@@ -294,7 +295,4 @@ The observed accuracies were:
     frameborder="0">
 </iframe>
 
-The resulting p-value is 0.804.
-
-Since the p-value is **greater** than 0.05, I **failed to reject** the null hypothesis. Therefore, there is insufficient evidence that the model performs differently for Blue Side and Red Side teams. The observed difference(0.00089) in accuracy is very small and is likely attributable to random chance. Based on this analysis, the final model appears to be fair with respect to side selection.
-
+Since the **p-value** is 0.818, which is **greater** than 0.05, I **failed to reject** the null hypothesis. Therefore, there is insufficient evidence that the model performs differently for Blue Side and Red Side teams. The observed difference(0.00089) in accuracy is very small and is likely attributable to random chance. Based on this analysis, the final model appears to be fair with respect to side selection.
