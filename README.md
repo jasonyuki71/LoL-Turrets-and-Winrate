@@ -295,4 +295,4 @@ The observed accuracies were:
     frameborder="0">
 </iframe>
 
-Since the **p-value** is 0.818, which is **greater** than 0.05, I **failed to reject** the null hypothesis. Therefore, there is insufficient evidence that the model performs differently for Blue Side and Red Side teams. The observed difference(0.00089) in accuracy is very small and is likely attributable to random chance. Based on this analysis, the final model appears to be fair with respect to side selection.
+Since the **p-value** is 0.844, which is **greater** than 0.05, I **failed to reject** the null hypothesis. Therefore, there is insufficient evidence that the model performs differently for Blue Side and Red Side teams. The observed difference(0.00089) in accuracy is very small and is likely attributable to random chance. Based on this analysis, the final model appears to be fair with respect to side selection.
