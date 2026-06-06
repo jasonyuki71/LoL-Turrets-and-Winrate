@@ -255,7 +255,7 @@ I used GridSearchCV with 5-fold cross-validation to tune the following hyperpara
 | Baseline Logistic Regression | 96.55%         | 96.57%        |
 | Final Model                  | 98.98%         | 98.55%        |
 
-The final model's training accuracy and testing accuracy are improving test accuracy by approximately 1.98 percentage points over the baseline model. This improvement suggests that the engineered features and Random Forest classifier were able to capture additional information about match outcomes that was not utilized by the baseline Logistic Regression model.
+The final model achieved a training accuracy of 98.98% and a testing accuracy of 98.55%, improving upon the baseline model's testing accuracy of 96.57%, which Improvement in Test Accuracy is 0.01979. This improvement suggests that the engineered features and Random Forest classifier were able to capture additional information about match outcomes that was not utilized by the baseline Logistic Regression model.
 
 The Random Forest model has training accuracy is slightly higher than the testing accuracy, but the gap between them is only 0.43 percentage points. This small difference suggests that the model is not overfitting or underfitting, which generalizes well to unseen matches. In addition, the improvement in testing accuracy over the baseline model indicates that the engineered features and model tuning contributed meaningful predictive value.
 
@@ -295,4 +295,4 @@ The observed accuracies were:
     frameborder="0">
 </iframe>
 
-Since the **p-value** is 0.844, which is **greater** than 0.05, I **failed to reject** the null hypothesis. Therefore, there is insufficient evidence that the model performs differently for Blue Side and Red Side teams. The observed difference(0.00089) in accuracy is very small and is likely attributable to random chance. Based on this analysis, the final model appears to be fair with respect to side selection.
+Since the **p-value** is 0.813, which is **greater** than 0.05, I **failed to reject** the null hypothesis. Therefore, there is insufficient evidence that the model performs differently for Blue Side and Red Side teams. The observed difference(0.00089) in accuracy is very small and is likely attributable to random chance. Based on this analysis, the final model appears to be fair with respect to side selection.
