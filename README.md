@@ -251,6 +251,7 @@ The final model achieved a training accuracy of 98.98% and a testing accuracy of
 
 Although the final model achieved a higher training accuracy than the baseline model, the testing accuracy also increased substantially. The difference between training and testing accuracy is only about 0.43 percentage points, indicating little evidence of severe overfitting and suggesting that the model generalizes well to unseen matches.
 
+The confusion matrix shows that the final model correctly classifies most wins and losses, which is consistent with its high test accuracy of 98.55%.
 <iframe
     src="assets/confusion_matrix.html"
     width="100%"
