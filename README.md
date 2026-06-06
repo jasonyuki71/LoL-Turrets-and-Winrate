@@ -53,7 +53,7 @@ Below is the `head` of my cleaned `lol_team` dataframe (25058 rows × 12 columns
 <iframe
     src="assets/cleaned_df.html"
     width="100%"
-    height="200">
+    height="150">
 </iframe>
 
  These variables were chosen because they capture key aspects of team performance, including combat success (`teamkills`, `teamdeaths`), objective control (`towers`, `dragons`, `barons`), and economic advantages (`golddiffat25`, `xpdiffat25`, `csdiffat25`). These factors are important indicators of a team's win rate.
@@ -69,7 +69,7 @@ One important variable is the number of towers destroyed by a team. The boxplot 
     frameborder="0">
 </iframe>
 
-The other important variable is the number of kills secured by a team. The boxplot shows that most of the teams had 8 ~ 20 s in a match. 
+The other important variable is the number of kills secured by a team. The boxplot shows that most of the teams had 8 ~ 20 kills in a match. 
 <iframe
     src="assets/kills_histogram.html"
     width="100%"
@@ -80,7 +80,7 @@ The other important variable is the number of kills secured by a team. The boxpl
 <iframe
     src="assets/describe_towers_teamkills.html"
     width="100%"
-    height="200"
+    height="250"
     frameborder="0">
 </iframe>
 
@@ -246,6 +246,18 @@ The baseline model only used raw `towers`, raw `teamkills`, and `side`. For the 
 * `objective_score = dragons + 2 * barons`: Dragons and barons are important neutral objectives. I weight barons more heavily because baron is usually a stronger late-game objective.
 
 I use a **Random Forest Classifier** as the final model because it captures nonlinear relationships and interactions between features. This is useful because the effect of towers, kills, and objectives on winning may not be perfectly linear.
+
+The final model achieved a training accuracy of 98.98% and a testing accuracy of 98.55%, improving upon the baseline model's testing accuracy of 96.57%. This improvement suggests that the engineered features and Random Forest classifier were able to capture additional information about match outcomes that was not utilized by the baseline Logistic Regression model.
+
+Although the final model achieved a higher training accuracy than the baseline model, the testing accuracy also increased substantially. The difference between training and testing accuracy is only about 0.43 percentage points, indicating little evidence of severe overfitting and suggesting that the model generalizes well to unseen matches.
+
+<iframe
+    src="assets/confusion_matrix.html"
+    width="100%"
+    height="500"
+    frameborder="0">
+</iframe>
+
 
 ### Hyperparameter Tuning
 I used GridSearchCV with 5-fold cross-validation to tune the following hyperparameters:
